@@ -1,4 +1,4 @@
-import static nu.studer.gradle.jooq.JooqEdition.OSS
+import static nu.studer.gradle.jooq.JooqEdition.*
 
 plugins {
 	id 'java'
@@ -24,15 +24,36 @@ repositories {
 	mavenCentral()
 }
 
+ext {
+	set('springCloudVersion', "2021.0.8")
+}
+
 dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-amqp'
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-	implementation 'org.springframework.boot:spring-boot-starter-jooq'
+
+	// validation
 	implementation 'org.springframework.boot:spring-boot-starter-validation'
+
+	implementation 'org.springframework.boot:spring-boot-starter-jooq'
+	//implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
+	//implementation 'org.springframework.boot:spring-boot-starter-security'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.springframework.cloud:spring-cloud-starter-openfeign'
 	compileOnly 'org.projectlombok:lombok'
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	runtimeOnly 'org.mariadb.jdbc:mariadb-java-client'
+
+	// H2 Database
+	runtimeOnly 'com.h2database:h2'
+
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testImplementation 'org.springframework.amqp:spring-rabbit-test'
+
+	// mapstruct
+	implementation 'org.mapstruct:mapstruct:1.5.5.Final'
+	annotationProcessor 'org.mapstruct:mapstruct-processor:1.5.5.Final'
 
 	// swagger-ui(https://mvnrepository.com/artifact/io.springfox/springfox-boot-starter)
 	implementation 'io.springfox:springfox-boot-starter:3.0.0'
@@ -42,12 +63,18 @@ dependencies {
 	jooqGenerator("jakarta.xml.bind:jakarta.xml.bind-api:3.0.1")
 }
 
-tasks.named('bootBuildImage') {
-	builder = 'paketobuildpacks/builder-jammy-base:latest'
+dependencyManagement {
+	imports {
+		mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+	}
 }
 
 tasks.named('test') {
 	useJUnitPlatform()
+}
+
+sourceSets {
+	main.java.srcDir "build/generated/jooq"
 }
 
 jooq {
@@ -62,7 +89,7 @@ jooq {
 				logging = org.jooq.meta.jaxb.Logging.WARN
 				jdbc {
 					driver = 'org.mariadb.jdbc.Driver'
-					url = 'jdbc:mariadb://10.5.222.197:3306/configuration'
+					url = 'jdbc:mariadb://10.5.222.197:3306/approval'
 					user = 'root'
 					password = 'example'
 					properties {
