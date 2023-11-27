@@ -1,0 +1,31 @@
+spring:
+  config:
+    activate:
+      on-profile: dev
+  datasource:
+    url: jdbc:mariadb://10.5.222.197:3306/approval
+    driver-class-name: org.mariadb.jdbc.Driver
+    username: root
+    password: example
+  jpa:
+    properties:
+      hibernate:
+        format_sql: true
+        show_sql: true
+  rabbitmq:
+    host: 10.5.222.197
+    port: 5672
+    username: admin
+    password: Qw12
+    virtual-host: dev
+    listener:
+      simple:
+        prefetch: 1
+  mvc:
+    path-match:
+      matching-strategy: ant_path_matcher
+  jooq:
+    sql-dialect: mariadb
+  logging:
+    level:
+      root: info

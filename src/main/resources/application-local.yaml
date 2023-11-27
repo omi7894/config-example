@@ -1,0 +1,27 @@
+spring:
+  config:
+    activate:
+      on-profile: local
+  rabbitmq:
+    host: 10.5.222.197
+    port: 5672
+    username: admin
+    password: Qw12
+    virtual-host: dev
+    listener:
+      simple:
+        prefetch: 1
+  mvc:
+    path-match:
+      matching-strategy: ant_path_matcher
+    jooq:
+      sql-dialect: mariadb
+  logging:
+    level:
+      root: info
+  datasource:
+    url: jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=false;MODE=MYSQL
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: none
