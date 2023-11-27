@@ -7,7 +7,7 @@ public class BusinessQueryOutDto {
     private String id;
     private String companyCode;
     private String groupCode;
-    private String groupName;
+    private String groupCodeName;
     private String code;
     private String codeName;
     private String description;

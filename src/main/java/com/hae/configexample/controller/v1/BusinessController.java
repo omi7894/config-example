@@ -17,9 +17,19 @@ public class BusinessController {
 
     private final BusinessQueryService businessQueryService;
 
+    @GetMapping("/{id}")
+    @ResponseBody
+    public ResponseEntity<BusinessQueryOutDto> findBusinessById(@PathVariable String id){
+        return ResponseEntity.ok()
+                .body(businessQueryService.findBusinessById(id));
+    }
+
     @GetMapping
     @ResponseBody
     public ResponseEntity<List<BusinessQueryOutDto>> findAll(@Valid @RequestBody BusinessQueryInDto businessQueryInDto){
+
+        System.out.println(businessQueryInDto);
+
         return ResponseEntity.ok()
                 .body(businessQueryService.findAll(businessQueryInDto));
 

@@ -89,7 +89,7 @@ jooq {
 				logging = org.jooq.meta.jaxb.Logging.WARN
 				jdbc {
 					driver = 'org.mariadb.jdbc.Driver'
-					url = 'jdbc:mariadb://10.5.222.197:3306/approval'
+					url = 'jdbc:mariadb://10.5.222.197:3306/configuration'
 					user = 'root'
 					password = 'example'
 					properties {

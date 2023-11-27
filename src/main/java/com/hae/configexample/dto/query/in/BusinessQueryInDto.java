@@ -7,5 +7,5 @@ import javax.validation.constraints.NotBlank;
 @Data
 public class BusinessQueryInDto {
     @NotBlank
-    private String companyId;
+    private String code;
 }

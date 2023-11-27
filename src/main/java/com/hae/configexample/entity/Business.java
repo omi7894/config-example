@@ -11,8 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import java.time.ZonedDateTime;
 
+//@Table(name = "BUSINESS")
 @Entity
-@Table(name = "BUSINESS")
 @Data
 @Builder
 @AllArgsConstructor
@@ -21,8 +21,8 @@ public class Business {
     @Column(name = "id")
     private String id;
 
-    @Column(name = "company_id")
-    private String companyId;
+    @Column(name = "company_code")
+    private String companyCode;
 
     @Column(name = "group_code")
     private String groupCode;
@@ -43,9 +43,9 @@ public class Business {
     private Character useYn;
 
     private String createUserId;
-    private ZonedDateTime createDateTime;
+    private ZonedDateTime createDatetime;
     private String modifyUserId;
-    private ZonedDateTime modifyDateTime;
+    private ZonedDateTime modifyDatetime;
 
     public Business() {
         if (this.id == null) {

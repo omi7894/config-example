@@ -3,7 +3,7 @@ spring:
     activate:
       on-profile: dev
   datasource:
-    url: jdbc:mariadb://10.5.222.197:3306/approval
+    url: jdbc:mariadb://10.5.222.197:3306/configuration
     driver-class-name: org.mariadb.jdbc.Driver
     username: root
     password: example
